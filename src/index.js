@@ -39,6 +39,7 @@ const MORSE_TABLE = {
 
 function decode(expr) {
     let arrElem = [], arrWord = [];
+    let result = '';
 
     for (let i = 0; i < expr.length; i+=10) {
         arrElem.push(expr.slice(i, i + 10));
@@ -51,20 +52,23 @@ function decode(expr) {
             arrWord.push(decodeElement(arrElem[i]));
         }
     }
-    return arrWord.join('');
+    result = arrWord.join(''); 
+
+    return result;
 }
 
 function decodeElement(arr) {
     let wordCode = arr.substring(arr.indexOf('1'));
-    let wordMorze = [];
+    let wordMorse = [];
+
     for (let i = 0; i < wordCode.length; i+=2) {
         if (wordCode.substring(i, i + 2) === '10') {
-            wordMorze.push('.');
+            wordMorse.push('.');
         } else { 
-            wordMorze.push('-');
+            wordMorse.push('-');
         }
     }
-    return MORSE_TABLE[wordMorze.join('')]
+    return MORSE_TABLE[wordMorse.join('')]
 }
 
 module.exports = {
